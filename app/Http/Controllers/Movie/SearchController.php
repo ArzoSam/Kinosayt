@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Movie;
 
 use App\Http\Controllers\Controller;
+use App\Models\Actor;
+use App\Models\Director;
 use App\Models\Filter\Filter;
 use App\Models\Genre;
 use App\Models\Movie;
@@ -15,6 +17,8 @@ class SearchController extends Controller
         $search_text = $_GET['movie'];
         $movies = Movie::query()->where('title','LIKE', '%'.$search_text.'%');
         $years = Movie::get('year');
+        $actors = Actor::all();
+        $directors = Director::all();
         $genres = Genre::all();
         if (isset($request->genres) && isset($request->years)) {
             $genresA = array_map('intval', $request->genres);
@@ -30,7 +34,7 @@ class SearchController extends Controller
             $moviesQuery = Filter::filterByYears($movies, $yearsA);
             $movies = $moviesQuery->orderBy('title');
         }
-        $movies = $movies->get();
-        return view('movie.index', compact('movies','years','genres'));
+        $movies = $movies->paginate(25);
+        return view('movie.index', compact('movies','years','genres', 'actors', 'directors'));
     }
 }
