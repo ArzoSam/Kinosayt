@@ -166,6 +166,20 @@ class IndexController extends Controller
                 $movies = $moviesQuery->orderBy('title');
             }
         }
+        if (isset($request->year_filter)) {
+            $fromYear = $request->year_from;
+            $toYear = $request->year_to;
+            $movies = $movies->whereBetween('year', [$fromYear, $toYear])
+                ->orderBy('year', 'desc');
+        }elseif (isset($request->rate_filter)) {
+            $fromRate = $request->rate_from;
+            $toRate = $request->rate_to;
+            $movies = $movies->whereHas('comments', function ($query) use ($fromRate, $toRate) {
+                $query->select(DB::raw('AVG(comments.rating) as average_rating'))
+                    ->groupBy('movie_id')
+                    ->havingRaw('average_rating BETWEEN ? AND ?', [$fromRate, $toRate]);
+            });
+        }
         $movies = $movies->paginate(25);
         return view('movie.index', compact('movies', 'directors', 'years', 'actors'));
     }

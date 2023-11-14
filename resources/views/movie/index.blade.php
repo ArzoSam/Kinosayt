@@ -66,6 +66,24 @@
                                     @endforeach
                                 @endif
                             </ul>
+                            <ul>
+                                <h4>Year(from-to)</h4>
+
+                                <span>From</span><input type="number" style="width: 100px; margin-bottom: 10px;" name="year_from" class="year_from" id="" value="1950">
+                                <br>
+                                <span>To</span><input type="number" style="width: 100px; margin-bottom: 10px;" name="year_to" class="year_to" id="" value="2024">
+                                <br>
+                                <button class="year_filter">filter</button>
+                            </ul>
+                            <ul>
+                                <h4>Rate(from-to)</h4>
+
+                                <span>From</span><input type="number" style="width: 100px; margin-bottom: 10px;" name="rate_from" class="rate_from" id="" value="0">
+                                <br>
+                                <span>To</span><input type="number" style="width: 100px; margin-bottom: 10px;" name="rate_to" class="rate_to" id="" value="5">
+                                <br>
+                                <button class="rate_filter">filter</button>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -169,6 +187,50 @@
                     var $response = $(data);
                     var dataToday = $response.find('.product-wrapper');
                     $('.product-wrapper').html(dataToday);
+                },
+            });
+        })
+        $('.year_filter').click(function (){
+            var from=$('.year_from').val()
+            var to=$('.year_to').val()
+            var year_filter=1;
+            $.ajax({
+                url: "{{route('movie.index')}}",
+                type: "GET",
+                data: {
+                    year_from: from,
+                    year_to: to,
+                    year_filter: year_filter,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: (data) => {
+                    var $response = $(data);
+                    var dataToday = $response.find('.product-wrapper');
+                    $('.product-wrapper-a').html(dataToday);
+                },
+            });
+        })
+        $('.rate_filter').click(function (){
+            var from=$('.rate_from').val()
+            var to=$('.rate_to').val()
+            var rate_filter=1;
+            $.ajax({
+                url: "{{route('movie.index')}}",
+                type: "GET",
+                data: {
+                    rate_from: from,
+                    rate_to: to,
+                    rate_filter: rate_filter,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: (data) => {
+                    var $response = $(data);
+                    var dataToday = $response.find('.product-wrapper');
+                    $('.product-wrapper-a').html(dataToday);
                 },
             });
         })
