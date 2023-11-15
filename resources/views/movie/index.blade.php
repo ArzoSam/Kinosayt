@@ -2,9 +2,8 @@
 
 @section('content')
     <div class="catalog_glav">
-        <h2>All Films</h2>
-        <div class="pl-5 d-flex w-100 justify-content-between no_hover">
-            <div class="col-lg-3">
+        <div class="pl-5 d-flex w-100 justify-content-between no_hover for_media">
+            <div class="col-lg-3 sidebar_main_div">
                 <div class="sidebar-area">
                     <div class="sidebar-item">
                         <h4 class="sidebar-title">Film Directors</h4>
@@ -51,7 +50,7 @@
                     <div class="sidebar-item">
                         <h4 class="sidebar-title">Film Years</h4>
                         <div class="sidebar-body">
-                            <ul class="tags">
+                            <ul class="tags sidebar-list">
                                 @if(is_object($years))
                                     @foreach($years as $year)
                                         <li>
@@ -66,34 +65,43 @@
                                     @endforeach
                                 @endif
                             </ul>
-                            <ul>
-                                <h4>Year(from-to)</h4>
 
-                                <span>From</span><input type="number" style="width: 100px; margin-bottom: 10px;" name="year_from" class="year_from" id="" value="1950">
-                                <br>
-                                <span>To</span><input type="number" style="width: 100px; margin-bottom: 10px;" name="year_to" class="year_to" id="" value="2024">
-                                <br>
-                                <button class="year_filter">filter</button>
-                            </ul>
-                            <ul>
-                                <h4>Rate(from-to)</h4>
-
-                                <span>From</span><input type="number" style="width: 100px; margin-bottom: 10px;" name="rate_from" class="rate_from" id="" value="0">
-                                <br>
-                                <span>To</span><input type="number" style="width: 100px; margin-bottom: 10px;" name="rate_to" class="rate_to" id="" value="5">
-                                <br>
-                                <button class="rate_filter">filter</button>
-                            </ul>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-6 mb-5">
-                    <div class="sort-by-wrapper">
-                        <label for="sort"  class="sr-only">Sort By</label>
-                        <select name="sort" style="width: 150px" id="sort" class="option">
-                            <option value="sbn">Sort By Newest</option>
-                            <option value="sbr">Sort By Rating</option>
-                        </select>
+                    <div class="sidebar-item">
+                        <ul class="yearFromToUl">
+                            <h4>Year(from-to)</h4>
+
+                            <span>From</span><input type="number" style="width: 100px; margin-bottom: 10px;"
+                                                    name="year_from" class="year_from" id="" value="1950">
+                            <br>
+                            <span>To</span><input type="number" style="width: 100px; margin-bottom: 10px;"
+                                                  name="year_to" class="year_to" id="" value="2024">
+                            <br>
+                            <button class="year_filter">filter</button>
+                        </ul>
+                    </div>
+                    <div class="sidebar-item">
+                        <ul class="rateFromToUl">
+                            <h4>Rate(from-to)</h4>
+
+                            <span>From</span><input type="number" style="width: 100px; margin-bottom: 10px;"
+                                                    name="rate_from" class="rate_from" id="" value="0">
+                            <br>
+                            <span>To</span><input type="number" style="width: 100px; margin-bottom: 10px;"
+                                                  name="rate_to" class="rate_to" id="" value="5">
+                            <br>
+                            <button class="rate_filter">filter</button>
+                        </ul>
+                    </div>
+                    <div class="sidebar-item media_sidebar_item">
+                        <div class="sort-by-wrapper">
+                            <label for="sort" class="sr-only">Sort By</label>
+                            <select name="sort" id="sort" class="option">
+                                <option value="sbn">Sort By Newest</option>
+                                <option value="sbr">Sort By Rating</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -190,10 +198,10 @@
                 },
             });
         })
-        $('.year_filter').click(function (){
-            var from=$('.year_from').val()
-            var to=$('.year_to').val()
-            var year_filter=1;
+        $('.year_filter').click(function () {
+            var from = $('.year_from').val()
+            var to = $('.year_to').val()
+            var year_filter = 1;
             $.ajax({
                 url: "{{route('movie.index')}}",
                 type: "GET",
@@ -212,10 +220,10 @@
                 },
             });
         })
-        $('.rate_filter').click(function (){
-            var from=$('.rate_from').val()
-            var to=$('.rate_to').val()
-            var rate_filter=1;
+        $('.rate_filter').click(function () {
+            var from = $('.rate_from').val()
+            var to = $('.rate_to').val()
+            var rate_filter = 1;
             $.ajax({
                 url: "{{route('movie.index')}}",
                 type: "GET",
@@ -253,7 +261,7 @@
             $('input[name="actor[]"]:checked').each(function () {
                 actors.push($(this).val());
             });
-            console.log(years, directors,actors)
+            console.log(years, directors, actors)
             $.ajax({
                 type: 'GET',
                 url: '{{route('movie.index')}}',

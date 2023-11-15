@@ -20,7 +20,6 @@ class IndexController extends Controller
         $directors = Director::all();
         $actors = Actor::all();
         if (isset($request->valueBy) && isset($request->filter) == false) {
-//            dd($request->valueBy);
             if ($request->valueBy == 'sbn') {
                 $movies = $movies->orderBy('created_at', 'desc');
             } elseif ($request->valueBy == 'sbr') {
@@ -94,7 +93,7 @@ class IndexController extends Controller
                         ->groupBy('movies.id')
                         ->orderBy('average_rating', 'desc');
                 }
-            }elseif ($request->valueBy == 'sbn') {
+            } elseif ($request->valueBy == 'sbn') {
                 if (isset($request->director) && isset($request->years) && isset($request->actors)) {
                     $directorA = array_map('intval', $request->director);
                     $yearsA = array_map('intval', $request->years);
@@ -171,14 +170,17 @@ class IndexController extends Controller
             $toYear = $request->year_to;
             $movies = $movies->whereBetween('year', [$fromYear, $toYear])
                 ->orderBy('year', 'desc');
-        }elseif (isset($request->rate_filter)) {
+        } elseif (isset($request->rate_filter)) {
             $fromRate = $request->rate_from;
             $toRate = $request->rate_to;
-            $movies = $movies->whereHas('comments', function ($query) use ($fromRate, $toRate) {
-                $query->select(DB::raw('AVG(comments.rating) as average_rating'))
-                    ->groupBy('movie_id')
-                    ->havingRaw('average_rating BETWEEN ? AND ?', [$fromRate, $toRate]);
-            });
+            $movies = $movies->whereHas(
+                'comments',
+                function ($query) use ($fromRate, $toRate) {
+                    $query->select(DB::raw('AVG(comments.rating) as average_rating'))
+                        ->groupBy('movie_id')
+                        ->havingRaw('average_rating BETWEEN ? AND ?', [$fromRate, $toRate]);
+                }
+            );
         }
         $movies = $movies->paginate(25);
         return view('movie.index', compact('movies', 'directors', 'years', 'actors'));
