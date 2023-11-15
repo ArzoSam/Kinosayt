@@ -28,6 +28,7 @@ class Movie extends Model
     {
         return $this->belongsTo(Director::class, 'director_id', 'id');
     }
+
     public function likedUsers()
     {
         return $this->belongsToMany(User::class, 'movie_user_likes', 'movie_id', 'user_id');

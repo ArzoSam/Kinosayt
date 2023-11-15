@@ -9,6 +9,22 @@ button {
     transition: 1s;
 }
 
+.rating-item {
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.comment-list {
+    border-top: 2px solid;
+    padding-top: 25px;
+}
+
+.rating-author-txt p {
+    margin-bottom: 0 !important;
+}
+
 a {
     text-decoration: none;
 }

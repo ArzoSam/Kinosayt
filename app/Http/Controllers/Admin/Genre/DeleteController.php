@@ -17,6 +17,5 @@ class DeleteController extends Controller
     {
         $genre->delete();
         return redirect()->route('admin.genre.index');
-
     }
 }

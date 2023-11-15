@@ -16,6 +16,6 @@ class UpdateController extends Controller
         $data = $request->validated();
         $data['image'] = Storage::disk('public')->put('/images', $data['image']);
         $director->update($data);
-        return view('admin.director.show' , compact('director'));
+        return view('admin.director.show', compact('director'));
     }
 }

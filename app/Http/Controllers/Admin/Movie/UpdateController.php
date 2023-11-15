@@ -12,8 +12,8 @@ class UpdateController extends BaseController
     public function __invoke(UpdateRequest $request, Movie $movie)
     {
         $data = $request->validated();
-        $this->service->update($data,$movie);
+        $this->service->update($data, $movie);
 
-        return view('admin.movie.show' , compact('movie'));
+        return view('admin.movie.show', compact('movie'));
     }
 }

@@ -16,6 +16,5 @@ class DeleteController extends Controller
     {
         $director->delete();
         return redirect()->route('admin.director.index');
-
     }
 }

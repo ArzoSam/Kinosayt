@@ -26,7 +26,8 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('admin.movie.update', $movie->id) }}" method="post" enctype="multipart/form-data" class=" mt-3">
+                        <form action="{{ route('admin.movie.update', $movie->id) }}" method="post"
+                              enctype="multipart/form-data" class=" mt-3">
                             @csrf
                             @method('patch')
                             <div class="form-group">
@@ -53,7 +54,7 @@
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" name="preview_image">
-                                        <label class="custom-file-label" >Choose image</label>
+                                        <label class="custom-file-label">Choose image</label>
                                     </div>
                                     <div class="input-group-append">
                                         <span class="input-group-text">Upload</span>
@@ -79,9 +80,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Tags</label>
-                                <select class="select2" name="actor_ids[]" multiple="multiple" data-placeholder="Select actors" style="width: 100%;">
+                                <select class="select2" name="actor_ids[]" multiple="multiple"
+                                        data-placeholder="Select actors" style="width: 100%;">
                                     @foreach($actors as $actor)
-                                        <option {{ is_array( $movie->actors->pluck('id')->toArray() ) && in_array($actor->id, $movie->actors->pluck('id')->toArray() ) ? 'selected' : '' }} value="{{ $actor->id }}">{{ $actor->name }}</option>
+                                        <option
+                                            {{ is_array( $movie->actors->pluck('id')->toArray() ) && in_array($actor->id, $movie->actors->pluck('id')->toArray() ) ? 'selected' : '' }} value="{{ $actor->id }}">{{ $actor->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('actor_ids')
@@ -90,9 +93,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Tags</label>
-                                <select class="select2" name="genre_ids[]" multiple="multiple" data-placeholder="Select genres" style="width: 100%;">
+                                <select class="select2" name="genre_ids[]" multiple="multiple"
+                                        data-placeholder="Select genres" style="width: 100%;">
                                     @foreach($genres as $genre)
-                                        <option {{ is_array( $movie->genres->pluck('id')->toArray() ) && in_array($genre->id, $movie->genres->pluck('id')->toArray() ) ? 'selected' : '' }} value="{{ $genre->id }}">{{ $genre->genre }}</option>
+                                        <option
+                                            {{ is_array( $movie->genres->pluck('id')->toArray() ) && in_array($genre->id, $movie->genres->pluck('id')->toArray() ) ? 'selected' : '' }} value="{{ $genre->id }}">{{ $genre->genre }}</option>
                                     @endforeach
                                 </select>
                                 @error('genre_ids')

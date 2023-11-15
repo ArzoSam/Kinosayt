@@ -19,6 +19,6 @@ class UpdateController extends Controller
         $data['image'] = Storage::disk('public')->put('/images', $data['image']);
 
         $actor->update($data);
-        return view('admin.actor.show' , compact('actor'));
+        return view('admin.actor.show', compact('actor'));
     }
 }

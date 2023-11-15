@@ -16,6 +16,6 @@ class EditController extends BaseController
         $actors = Actor::all();
         $genres = Genre::all();
         $directors = Director::all();
-        return view('admin.movie.edit' , compact('movie','actors', 'genres', 'directors'));
+        return view('admin.movie.edit', compact('movie', 'actors', 'genres', 'directors'));
     }
 }

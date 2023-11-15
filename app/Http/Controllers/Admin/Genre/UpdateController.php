@@ -15,6 +15,6 @@ class UpdateController extends Controller
     {
         $data = $request->validated();
         $genre->update($data);
-        return view('admin.genre.show' , compact('genre'));
+        return view('admin.genre.show', compact('genre'));
     }
 }

@@ -15,8 +15,6 @@ class StoreController extends BaseController
     {
         $data = $request->validated();
         $this->service->store($data);
-//        $data['image'] = Storage::disk('public')->put('/images', $data['image']);
-//        $post = Movie::firstOrCreate($data);
         return redirect()->route('admin.movie.index');
     }
 }

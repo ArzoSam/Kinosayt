@@ -11,6 +11,6 @@ class EditController extends Controller
 {
     public function __invoke(Director $director)
     {
-        return view('admin.director.edit' , compact('director'));
+        return view('admin.director.edit', compact('director'));
     }
 }

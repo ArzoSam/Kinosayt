@@ -46,13 +46,17 @@
                                     <tr>
                                         <td>{{$actor->id}}</td>
                                         <td>{{$actor->name}}</td>
-                                        <td class="text-center"><a href="{{ route('admin.actor.show', $actor->id) }}"><i class="fas fa-solid fa-eye"></i></a></td>
-                                        <td><a href="{{ route('admin.actor.edit', $actor->id) }}" class="text-success"><i class="fas fa-solid fa-pen"></i></a></td>
+                                        <td class="text-center"><a href="{{ route('admin.actor.show', $actor->id) }}"><i
+                                                    class="fas fa-solid fa-eye"></i></a></td>
+                                        <td><a href="{{ route('admin.actor.edit', $actor->id) }}"
+                                               class="text-success"><i class="fas fa-solid fa-pen"></i></a></td>
                                         <td>
                                             <form action="{{ route('admin.actor.delete', $actor->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" class="border-0 bg-transparent"><i class="fas fa-solid fa-trash text-danger" role="button"></i></button>
+                                                <button type="submit" class="border-0 bg-transparent"><i
+                                                        class="fas fa-solid fa-trash text-danger" role="button"></i>
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>

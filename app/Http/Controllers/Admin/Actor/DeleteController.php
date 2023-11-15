@@ -18,6 +18,5 @@ class DeleteController extends Controller
     {
         $actor->delete();
         return redirect()->route('admin.actor.index');
-
     }
 }

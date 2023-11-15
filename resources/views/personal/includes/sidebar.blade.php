@@ -3,7 +3,8 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <ul class="nav nav-pills nav-sidebar flex-column pt-3" data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar flex-column pt-3" data-widget="treeview" role="menu"
+            data-accordion="false">
             <li class="nav-item">
                 <a href="{{route('personal.main.index')}}" class="nav-link ">
                     <i class="nav-icon fas fa-solid fa-house-user"></i>
